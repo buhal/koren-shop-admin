@@ -1,0 +1,249 @@
+
+X [ERROR] TS2693: 'ApexCharts' only refers to a type, but is being used as a value here. [plugin angular-compiler]
+
+    node_modules/ng-apexcharts/index.d.ts:1175:27:
+      1175 │         ApexCharts: typeof ApexCharts;
+           ╵                            ~~~~~~~~~~
+
+
+X [ERROR] TS2694: Namespace 'globalThis' has no exported member 'ApexCharts'. [plugin angular-compiler]
+
+    node_modules/ng-apexcharts/index.d.ts:1206:68:
+      1206 │ ...rtInstance: _angular_core.WritableSignal<globalThis.ApexCharts>;
+           ╵                                                        ~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '@angular/cdk/overlay' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ng-select2-component/lib/select2.component.d.ts:1:34:
+      1 │ import { ConnectedPosition } from '@angular/cdk/overlay';
+        ╵                                   ~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '@angular/cdk/scrolling' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ng-select2-component/lib/select2.component.d.ts:2:30:
+      2 │ import { ViewportRuler } from '@angular/cdk/scrolling';
+        ╵                               ~~~~~~~~~~~~~~~~~~~~~~~~
+
+X [ERROR] TS2307: Cannot find module '@angular/cdk/overlay' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ng-select2-component/lib/select2.module.d.ts:7:20:
+      7 │ import * as i6 from "@angular/cdk/overlay";
+        ╵                     ~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/Editor.d.ts:6:21:
+      6 │ import { HTML } from './trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './commands/TextAlign' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/EditorCommands.d.ts:5:22:
+      5 │ import { Align } from './commands/TextAlign';
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/EditorCommands.d.ts:6:21:
+      6 │ import { HTML } from './trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/commands/Heading.d.ts:2:30:
+      2 │ import { ToggleCommand } from './types';
+        ╵                               ~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/commands/Link.d.ts:2:30:
+      2 │ import type { Dispatch } from './types';
+        ╵                               ~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/editor.component.d.ts:4:21:
+      4 │ import { HTML } from './trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/editor.module.d.ts:2:32:
+      2 │ import { NgxEditorConfig } from './types';
+        ╵                                 ~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/editor.service.d.ts:1:32:
+      1 │ import { NgxEditorConfig } from './types';
+        ╵                                 ~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/editor.service.d.ts:4:21:
+      4 │ import { HTML } from './trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/bubble/bubble.component.d.ts:5:24:
+      5 │ import { TBItems } from '../../../types';
+        ╵                         ~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../pipes/sanitize/sanitize-html.pipe' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/bubble/bubble.component.d.ts:6:33:
+      6 │ ...nitizeHtmlPipe } from '../../../pipes/sanitize/sanitize-html.pipe';
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/color-picker/color-picker.component.d.ts:5:21:
+      5 │ import { HTML } from '../../../trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/dropdown/dropdown.component.d.ts:5:31:
+      5 │ import { TBHeadingItems } from '../../../types';
+        ╵                                ~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/image/image.component.d.ts:6:21:
+      6 │ import { HTML } from '../../../trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/insert-command/insert-command.component.d.ts:6:37:
+      6 │ import { TBItems, ToolbarItem } from '../../../types';        ╵                                      ~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/insert-command/insert-command.component.d.ts:7:21:
+      7 │ import { HTML } from '../../../trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../../trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/link/link.component.d.ts:6:21:
+      6 │ import { HTML } from '../../../trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/menu.component.d.ts:2:54:
+      2 │ import { Toolbar, ToolbarItem, ToolbarDropdown } from '../../types';
+        ╵                                                       ~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../pipes/sanitize/sanitize-html.pipe' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/menu.module.d.ts:2:20:
+      2 │ import * as i1 from "../../pipes/sanitize/sanitize-html.pipe";
+        ╵                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './toggle-command/toggle-command.component' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/modules/menu/menu.module.d.ts:4:20:
+      4 │ import * as i3 from "./toggle-command/toggle-command.component";
+        ╵                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './trustedTypesUtil' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/lib/parsers.d.ts:2:21:
+      2 │ import { HTML } from './trustedTypesUtil';
+        ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './lib/schema' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/public_api.d.ts:6:14:
+      6 │ export * from './lib/schema';
+        ╵               ~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './lib/validators' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/public_api.d.ts:7:14:
+      7 │ export * from './lib/validators';
+        ╵               ~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module './lib/types' or its corresponding type declarations. [plugin angular-compiler]
+
+    node_modules/ngx-editor/public_api.d.ts:8:14:
+      8 │ export * from './lib/types';
+        ╵               ~~~~~~~~~~~~~
+
+
+X [ERROR] TS2304: Cannot find name 'ApexPlotOptions'. [plugin angular-compiler]
+
+    src/app/components/dashboard/dashboard.ts:91:15:
+      91 │   plotOptions: ApexPlotOptions;
+         ╵                ~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '@angular/cdk/drag-drop' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/components/menu/menu-tree/menu-tree.ts:1:61:
+      1 │ ...p, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+        ╵                                              ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value could not be determined statically. [plugin angular-compiler]
+
+    src/app/components/menu/menu-tree/menu-tree.ts:25:4:
+      25 │     DragDropModule,
+         ╵     ~~~~~~~~~~~~~~
+
+  Unknown reference.
+
+    src/app/components/menu/menu-tree/menu-tree.ts:25:4:
+      25 │     DragDropModule,
+         ╵     ~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '@angular/cdk/drag-drop' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/components/menu/menu.ts:1:31:
+      1 │ import { DragDropModule } from '@angular/cdk/drag-drop';
+        ╵                                ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value could not be determined statically. [plugin angular-compiler]
+
+    src/app/components/menu/menu.ts:25:4:
+      25 │     DragDropModule,
+         ╵     ~~~~~~~~~~~~~~
+
+  Unknown reference.
+
+    src/app/components/menu/menu.ts:25:4:
+      25 │     DragDropModule,
+         ╵     ~~~~~~~~~~~~~~
