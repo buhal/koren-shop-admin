@@ -43,3 +43,4 @@ coverage/
 
 # Angular compiler cache
 /.angular/cache/
+/public/assets/data/*
