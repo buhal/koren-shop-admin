@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable, inject } from "@angular/core";
 
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
-import { environment } from '../../../environments/environment.development';
-import { IAccountUser } from '../interface/account.interface';
+import { environment } from "../../../environments/environment.development";
+import { IAccountUser } from "../interface/account.interface";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AccountService {
   private http = inject(HttpClient);

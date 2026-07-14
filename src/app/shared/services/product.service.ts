@@ -23,4 +23,14 @@ export class ProductService {
       payload,
     );
   }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:3000/api/products/${id}`);
+  }
+
+  deleteAllProducts(ids: number[]): Observable<void> {
+    return this.http.delete<void>(`http://localhost:3000/api/products`, {
+      body: { ids },
+    });
+  }
 }

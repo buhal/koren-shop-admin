@@ -1,25 +1,23 @@
+import { Component, DOCUMENT, inject } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { Router, RouterOutlet } from "@angular/router";
 
-import { Component, DOCUMENT, inject } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router, RouterOutlet } from '@angular/router';
+import { NgbNavConfig } from "@ng-bootstrap/ng-bootstrap";
+import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
+import { TranslateService } from "@ngx-translate/core";
+import { Actions, Store, ofActionDispatched } from "@ngxs/store";
+import { Observable } from "rxjs";
 
-import { NgbNavConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Actions, Store, ofActionDispatched } from '@ngxs/store';
-import { Observable } from 'rxjs';
-
-import { IValues } from './shared/interface/setting.interface';
-import { LogoutAction } from './shared/store/action/auth.action';
-import { GetCountriesAction } from './shared/store/action/country.action';
-import { GetStatesAction } from './shared/store/action/state.action';
-import { SettingState } from './shared/store/state/setting.state';
-
+import { IValues } from "./shared/interface/setting.interface";
+import { LogoutAction } from "./shared/store/action/auth.action";
+import { GetCountriesAction } from "./shared/store/action/country.action";
+import { GetStatesAction } from "./shared/store/action/state.action";
+import { SettingState } from "./shared/store/state/setting.state";
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   imports: [RouterOutlet, LoadingBarRouterModule],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  templateUrl: "./app.html",
+  styleUrl: "./app.scss",
 })
 export class App {
   private actions = inject(Actions);
@@ -28,7 +26,9 @@ export class App {
   private store = inject(Store);
   private translate = inject(TranslateService);
 
-  setting$: Observable<IValues> = inject(Store).select(SettingState.setting) as Observable<IValues>;
+  setting$: Observable<IValues> = inject(Store).select(
+    SettingState.setting,
+  ) as Observable<IValues>;
 
   public favIcon: HTMLLinkElement | null;
 
@@ -36,22 +36,22 @@ export class App {
     const config = inject(NgbNavConfig);
     const document = inject<Document>(DOCUMENT);
 
-    this.translate.use('en');
+    this.translate.use("en");
     this.store.dispatch(new GetCountriesAction());
     this.store.dispatch(new GetStatesAction());
     // this.store.dispatch(new GetSettingOptionAction());
-    this.setting$.subscribe(setting => {
+    this.setting$.subscribe((setting) => {
       // Set Direction
-      if (setting?.general?.admin_site_language_direction === 'rtl') {
-        document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
-        document.body.classList.add('ltr');
+      if (setting?.general?.admin_site_language_direction === "rtl") {
+        document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
+        document.body.classList.add("ltr");
       } else {
-        document.getElementsByTagName('html')[0].removeAttribute('dir');
-        document.body.classList.remove('ltr');
+        document.getElementsByTagName("html")[0].removeAttribute("dir");
+        document.body.classList.remove("ltr");
       }
 
       // Set Favicon
-      this.favIcon = document.querySelector('#appIcon');
+      this.favIcon = document.querySelector("#appIcon");
       if (this.favIcon && this.favIcon.href)
         this.favIcon.href = setting?.general?.favicon_image?.original_url!;
 
@@ -59,7 +59,7 @@ export class App {
       this.titleService.setTitle(
         setting?.general?.site_title && setting?.general?.site_tagline
           ? `${setting?.general?.site_title} | ${setting?.general?.site_tagline}`
-          : 'Marketplace: Where Vendors Shine Together',
+          : "Marketplace: Where Vendors Shine Together",
       );
     });
 
@@ -68,7 +68,7 @@ export class App {
     config.roles = false;
 
     this.actions.pipe(ofActionDispatched(LogoutAction)).subscribe(() => {
-      void this.router.navigate(['/auth/login']);
+      void this.router.navigate(["/auth/login"]);
     });
   }
 }

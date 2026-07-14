@@ -136,6 +136,8 @@ export class ProductState {
       tap({
         next: (result: IProductModel) => {
           let paginateProduct;
+          console.log(result);
+
           if (action.payload!["page"] && action.payload!["paginate"]) {
             paginateProduct = result.data
               .map((product) => ({ ...product }))
@@ -241,7 +243,28 @@ export class ProductState {
     _ctx: StateContext<ProductStateModel>,
     { ids: _ids }: DeleteAllProductAction,
   ) {
-    // Delete All Product Login Here
+    return this.productService.deleteAllProducts(_ids).pipe(
+      tap({
+        next: (result) => {
+          console.log("Products deleted successfully", result);
+          this.notificationService.showSuccess("Products deleted successfully");
+          // remove the deleted products from the state
+          const state = _ctx.getState();
+          const updatedProducts = state.product.data.filter(
+            (product) => !_ids.includes(product.id),
+          );
+          _ctx.patchState({
+            product: {
+              data: updatedProducts,
+              total: updatedProducts.length,
+            },
+          });
+        },
+        error: (err) => {
+          throw new Error(err?.error?.message);
+        },
+      }),
+    );
   }
 
   @Action(ReplicateProductAction)

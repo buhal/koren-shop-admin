@@ -55,7 +55,10 @@ import { FormFields } from "../../../shared/components/ui/form-fields/form-field
 import { ImageUpload } from "../../../shared/components/ui/image-upload/image-upload";
 import { IMediaConfig, mediaConfig } from "../../../shared/data/media-config";
 import { IAccountUser } from "../../../shared/interface/account.interface";
-import { IAttachment } from "../../../shared/interface/attachment.interface";
+import {
+  IAttachment,
+  IAttachmentModel,
+} from "../../../shared/interface/attachment.interface";
 import { ICategoryModel } from "../../../shared/interface/category.interface";
 import {
   IProduct,
@@ -91,6 +94,8 @@ import { StoreState } from "../../../shared/store/state/store.state";
 import { TagState } from "../../../shared/store/state/tag.state";
 import { TaxState } from "../../../shared/store/state/tax.state";
 import { priceValidator } from "../../../shared/validator/price-validator";
+import { AttachmentState } from "src/app/shared/store/state/attachment.state";
+import { AttachmentService } from "src/app/shared/services/attachment.service";
 
 function convertToNgbDate(date: NgbDateStruct): NgbDate {
   return new NgbDate(date.year, date.month, date.day);
@@ -124,7 +129,7 @@ export class FormProduct {
   private renderer = inject(Renderer2);
   private platformId = inject(PLATFORM_ID);
   private document = inject<Document>(DOCUMENT);
-
+  private attachmentService = inject(AttachmentService);
   readonly type = input<string>(undefined);
 
   readonly nav = viewChild<NgbNav>("nav");
@@ -1133,48 +1138,83 @@ export class FormProduct {
     return combinations;
   }
 
-  submit(redirect: boolean = true) {
-    console.log(this.form.value);
-    // this.form.markAllAsTouched();
-    // let action = new CreateProductAction(this.form.value);
+  async submit(redirect: boolean = true) {
+    this.form.markAllAsTouched();
+    let action = new CreateProductAction(this.form.value);
 
-    // if (this.form.controls['type'].value === 'simple') {
-    //   this.form.controls['variations'].patchValue([]);
-    // }
+    if (this.form.controls["type"].value === "simple") {
+      this.form.controls["variations"].patchValue([]);
+    }
 
-    // // If product type simple then clear all variation
-    // if (['simple', 'external'].includes(this.form.controls['type'].value)) {
-    //   this.form.controls['attributes_ids'].setValue([]);
-    //   this.clearVariations();
-    // }
+    // If product type simple then clear all variation
+    if (["simple", "external"].includes(this.form.controls["type"].value)) {
+      this.form.controls["attributes_ids"].setValue([]);
+      this.clearVariations();
+    }
 
-    // if (this.type() == 'edit' && this.id) {
-    //   action = new UpdateProductAction(this.form.value, this.id);
-    // }
+    if (this.type() == "edit" && this.id) {
+      action = new UpdateProductAction(this.form.value, this.id);
+    }
 
-    // if (this.form.valid) {
-    //   this.store.dispatch(action).subscribe({
-    //     complete: () => {
-    //       if (redirect) void this.router.navigateByUrl('/product');
-    //     },
-    //   });
-    //   this.tabError = [];
-    // } else {
-    //   this.tabError = [];
-    //   const invalidFields = Object?.keys(this.form?.controls).filter(
-    //     key => this.form.controls[key].invalid,
-    //   );
-    //   invalidFields.forEach(invalidField => {
-    //     const div = document
-    //       .querySelector(`#${invalidField}`)
-    //       ?.closest('div.tab')
-    //       ?.getAttribute('tab');
-    //     if (div) {
-    //       this.nav().select(this.tabError?.length ? this.tabError[0] : div);
-    //       this.tabError?.push(div);
-    //     }
-    //   });
-    // }
+    if (this.form.valid) {
+      const attachments = this.store.selectSnapshot(AttachmentState.attachment);
+      console.log("form value:", this.form.value, "attachments", attachments);
+      if (attachments.total > 0) {
+        const filesToUpload = this.getAttachmentsFromForm(attachments);
+        if (filesToUpload.length > 0) {
+          try {
+            const uploadPromises = filesToUpload.map((file) =>
+              this.attachmentService.createAttachment(file).toPromise(),
+            );
+            await Promise.all(uploadPromises);
+          } catch (error) {
+            console.error("Upload failed:", error);
+            return;
+          }
+        }
+      }
+      this.store.dispatch(action).subscribe({
+        complete: () => {
+          if (redirect) void this.router.navigateByUrl("/product");
+        },
+      });
+      this.tabError = [];
+    } else {
+      this.tabError = [];
+      const invalidFields = Object?.keys(this.form?.controls).filter(
+        (key) => this.form.controls[key].invalid,
+      );
+      invalidFields.forEach((invalidField) => {
+        const div = document
+          .querySelector(`#${invalidField}`)
+          ?.closest("div.tab")
+          ?.getAttribute("tab");
+        if (div) {
+          this.nav().select(this.tabError?.length ? this.tabError[0] : div);
+          this.tabError?.push(div);
+        }
+      });
+    }
+  }
+
+  getAttachmentsFromForm(attachments: IAttachmentModel): IAttachment[] {
+    const filteredAttachments: IAttachment[] = [];
+    const formValue = this.form.value;
+    if (formValue.product_thumbnail_id?.length) {
+      const thumbnail = attachments.data.find(
+        (attachment) => attachment.id === formValue.product_thumbnail_id[0],
+      );
+      if (thumbnail) {
+        filteredAttachments.push(thumbnail);
+      }
+    }
+    if (formValue.product_galleries_id?.length) {
+      const galleryAttachments = attachments.data.filter((attachment) =>
+        formValue.product_galleries_id.includes(attachment.id),
+      );
+      filteredAttachments.push(...galleryAttachments);
+    }
+    return filteredAttachments;
   }
 
   ngOnDestroy() {

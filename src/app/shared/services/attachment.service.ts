@@ -1,10 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 
-import { Observable } from "rxjs";
+import { from, Observable, switchMap } from "rxjs";
 
 import { environment } from "../../../environments/environment.development";
-import { IAttachmentModel } from "../interface/attachment.interface";
+import {
+  IAttachment,
+  IAttachmentModel,
+} from "../interface/attachment.interface";
 import { Params } from "../interface/core.interface";
 
 @Injectable({
@@ -19,6 +22,37 @@ export class AttachmentService {
       {
         params: payload,
       },
+    );
+  }
+  // write a create attachment function that takes IAttachment and sends a file with the name of the
+  // attachment id.
+  createAttachment(attachment: IAttachment): Observable<IAttachment> {
+    const fileUrl = attachment.original_url || attachment.asset_url;
+
+    if (!fileUrl) {
+      return new Observable((observer) => {
+        observer.error(new Error("Attachment has no file URL"));
+      });
+    }
+
+    return from(fetch(fileUrl)).pipe(
+      switchMap((response) => response.blob()),
+      switchMap((blob) => {
+        const ext = attachment.file_name?.match(/\.[^.]+$/)?.[0] ?? "";
+        const fileName = `${attachment.id}${ext}`;
+
+        const file = new File([blob], fileName, {
+          type: blob.type || "application/octet-stream",
+        });
+
+        const formData = new FormData();
+        formData.append("file", file, fileName);
+
+        return this.http.post<IAttachment>(
+          "http://localhost:3000/api/attachments",
+          formData,
+        );
+      }),
     );
   }
 }
