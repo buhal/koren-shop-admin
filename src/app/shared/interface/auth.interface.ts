@@ -1,8 +1,10 @@
-import { IPermission } from './role.interface';
+import { IPermission } from "./role.interface";
 
 export interface IAuthUserStateModel {
   email: string;
   password: string;
+  access_token: string | null;
+  token: string | number;
 }
 
 export interface IAuthModel {

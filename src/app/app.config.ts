@@ -5,6 +5,7 @@ import {
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
+  withInterceptors,
 } from "@angular/common/http";
 import {
   ApplicationConfig,
@@ -26,10 +27,11 @@ import { routes } from "./app.routes";
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 import { GlobalErrorHandlerInterceptor } from "./core/interceptors/globle-error-handler.interceptor";
 import { LoaderInterceptor } from "./core/interceptors/loader.interceptor";
+import { InitAction } from "./shared/store/action/auth.action";
 import { AccountState } from "./shared/store/state/account.state";
+import { AuthState } from "./shared/store/state/auth.state";
 import { AttachmentState } from "./shared/store/state/attachment.state";
 import { AttributeState } from "./shared/store/state/attribute.state";
-import { AuthState } from "./shared/store/state/auth.state";
 import { BlogState } from "./shared/store/state/blog.state";
 import { BrandState } from "./shared/store/state/brand.state";
 import { CartState } from "./shared/store/state/cart.state";

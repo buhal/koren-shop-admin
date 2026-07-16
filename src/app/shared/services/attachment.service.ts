@@ -9,20 +9,27 @@ import {
   IAttachmentModel,
 } from "../interface/attachment.interface";
 import { Params } from "../interface/core.interface";
+import { Store } from "@ngxs/store";
+import { AuthState } from "../store/state/auth.state";
 
 @Injectable({
   providedIn: "root",
 })
 export class AttachmentService {
   private http = inject(HttpClient);
+  private store = inject(Store);
+
+  private getToken(): string | null {
+    return this.store.selectSnapshot(AuthState.accessToken);
+  }
 
   getAttachments(payload?: Params): Observable<IAttachmentModel> {
-    return this.http.get<IAttachmentModel>(
-      `${environment.URL}/attachment.json`,
-      {
-        params: payload,
-      },
-    );
+    const token = this.getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    return this.http.get<IAttachmentModel>(`${environment.URL}/attachments`, {
+      params: payload,
+      headers,
+    });
   }
   // write a create attachment function that takes IAttachment and sends a file with the name of the
   // attachment id.
@@ -48,9 +55,13 @@ export class AttachmentService {
         const formData = new FormData();
         formData.append("file", file, fileName);
 
+        const token = this.getToken();
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
         return this.http.post<IAttachment>(
           "http://localhost:3000/api/attachments",
           formData,
+          { headers },
         );
       }),
     );

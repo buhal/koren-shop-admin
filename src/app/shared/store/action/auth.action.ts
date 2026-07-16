@@ -3,32 +3,36 @@ import {
   IAuthUserStateModel,
   IUpdatePasswordModel,
   IVerifyEmailOtpModel,
-} from '../../interface/auth.interface';
+} from "../../interface/auth.interface";
+
+export class InitAction {
+  static readonly type = "[Auth] Init";
+}
 
 export class LoginAction {
-  static readonly type = '[Auth] Login';
+  static readonly type = "[Auth] Login";
   constructor(public payload: IAuthUserStateModel) {}
 }
 
 export class ForgotPassWordAction {
-  static readonly type = '[Auth] Forgot';
+  static readonly type = "[Auth] Forgot";
   constructor(public payload: IAuthUserForgotModel) {}
 }
 
 export class VerifyEmailOtpAction {
-  static readonly type = '[Auth] VerifyEmailOtp';
+  static readonly type = "[Auth] VerifyEmailOtp";
   constructor(public payload: IVerifyEmailOtpModel) {}
 }
 
 export class UpdatePasswordAction {
-  static readonly type = '[Auth] UpdatePassword';
+  static readonly type = "[Auth] UpdatePassword";
   constructor(public payload: IUpdatePasswordModel) {}
 }
 
 export class LogoutAction {
-  static readonly type = '[Auth] Logout';
+  static readonly type = "[Auth] Logout";
 }
 
 export class AuthClearAction {
-  static readonly type = '[Auth] Clear';
+  static readonly type = "[Auth] Clear";
 }
